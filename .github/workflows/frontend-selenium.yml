@@ -70,7 +70,7 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           mkdir report-site
-          cp pytest-html-report/report.html report-site/index.html
+          cp report.html report-site/index.html
 
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v3
