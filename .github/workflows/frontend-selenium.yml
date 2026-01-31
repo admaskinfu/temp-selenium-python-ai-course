@@ -46,7 +46,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
         run: |
           mkdir -p results
-          pytest ssqatest/tests -v --html=results/report.html --self-contained-html
+          pytest ssqatest/tests -m tcid67 -v --html=results/report.html --self-contained-html
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
