@@ -5,6 +5,11 @@ on:
   push:
     branches: [main, 'ci/**', 'feature/*']
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   frontend-test:
     runs-on: ubuntu-latest
@@ -50,3 +55,28 @@ jobs:
           name: pytest-html-report
           path: results/report.html
           retention-days: 30
+
+  deploy-report:
+    needs: frontend-test
+    if: always() && needs.frontend-test.result != 'cancelled'
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - name: Download HTML report
+        uses: actions/download-artifact@v4
+        with:
+          name: pytest-html-report
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir report-site
+          cp pytest-html-report/report.html report-site/index.html
+
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: report-site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
