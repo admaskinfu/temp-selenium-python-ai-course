@@ -38,4 +38,4 @@ jobs:
           DB_PASSWORD: ci_placeholder
         run: |
           mkdir -p results
-          pytest ssqatest/tests -m tcid67 -v
+          pytest ssqatest/tests -v
