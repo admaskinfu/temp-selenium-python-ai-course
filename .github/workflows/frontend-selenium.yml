@@ -81,3 +81,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
+      - name: Output Deployment Link
+        run: |
+          echo "### 🚀 Test Report Live at: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
