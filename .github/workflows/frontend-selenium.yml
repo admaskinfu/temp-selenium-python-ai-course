@@ -70,12 +70,12 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           mkdir report-site
-          cp report.html report-site/index.html
+          cp report.html docs/index.html
 
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: report-site
+          path: docs
 
       - name: Deploy to GitHub Pages
         id: deployment
