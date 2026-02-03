@@ -69,13 +69,14 @@ jobs:
 
       - name: Prepare Pages artifact
         run: |
-          mkdir report-site
-          cp report.html docs/index.html
+          mkdir -p _site
+          # Rename report.html to index.html so it loads as the homepage
+          cp report.html _site/index.html
 
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
